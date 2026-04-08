@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dr. Bikramaditya Das | Robotics & Comm Researcher</title>
+
+    <meta name="theme-color" content="#FF4D6D">
+    <link rel="icon" type="image/png" href="/static/logo.png">
+
+    <!-- TYPOGRAPHY ARCHITECTURE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,600&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= THEME Core ================= */
+        :root {
+            --bg-base: #FFFBF9;
+            --bg-deep: #fff0f3;
+            --lotus-pink: #FF4D6D;
+            --lotus-coral: #FF8FA3;
+            --lotus-peach: #FFC4A3;
+            --text-dark: #0a0506;
+            --text-soft: #635054;
+            --pure-white: #ffffff;
+            
+            --fluid-cubic: cubic-bezier(0.19, 1, 0.22, 1);
+            --snap-cubic: cubic-bezier(0.85, 0, 0.15, 1);
+            --masika-gradient: linear-gradient(135deg, #FF4D6D 0%, #FF8FA3 50%, #FFC4A3 100%);
+            
+            scrollbar-width: thin;
+            scrollbar-color: var(--lotus-pink) transparent;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--lotus-pink); border-radius: 10px; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; background: var(--bg-base); color: var(--text-dark); overflow-x: hidden; }
+        body { font-family: 'Manrope', sans-serif; overflow-x: hidden; }
+
+        /* ================= 01. SUPER HERO SECTION ================= */
+        #vp-hero {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% -20%, #ffffff 0%, #edf1f5 40%, #c4cfd8 80%, #90a0b2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-grain-overlay { 
+            position: absolute; inset: 0; 
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E'); 
+            pointer-events: none; z-index: 5; mix-blend-mode: color-burn; 
+        }
+
+        .hero-bottom-fog {
+            position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: 35vh;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,251,249,0.7) 50%, var(--bg-base) 100%);
+            z-index: 5; pointer-events: none; 
+            -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+            -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 100%); 
+            mask-image: linear-gradient(180deg, transparent 0%, black 100%);
+        }
+
+        .hero-ui-widget-left {
+            position: absolute; top: 40px; left: 4vw; z-index: 50; 
+            display: flex; align-items: center; gap: 12px; 
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.25));
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50px; 
+            padding: 5px 18px 5px 6px; 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 
+                        inset 0 0 0 1px rgba(255,255,255,1), 
+                        inset 0 -2px 15px rgba(255,255,255,0.4); 
+            transform-origin: left top; 
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            overflow: visible;
+        }
+        
+        .hero-ui-widget-left::after {
+            content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 50px; background: linear-gradient(45deg, transparent, rgba(255,77,109,0.3), transparent);
+            z-index: -1; opacity: 0; transition: opacity 0.6s ease; filter: blur(8px);
+        }
+        .hero-ui-widget-left:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255,255,255,1);
+            border-color: rgba(255, 255, 255, 1);
+        }
+        .hero-ui-widget-left:hover::after { opacity: 1; }
+
+        .hero-ui-w-avatar { 
+            width: 38px; height: 38px; border-radius: 50%; object-fit: cover; 
+            background: linear-gradient(135deg, var(--lotus-pink), var(--lotus-peach));
+            padding: 2px; box-shadow: 0 5px 15px rgba(255,77,109,0.25); 
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1); 
+        }
+        .hero-ui-widget-left:hover .hero-ui-w-avatar { transform: rotate(360deg); }
+
+        .hero-ui-w-txt { display: flex; flex-direction: column; justify-content: center; }
+        .hero-ui-w-txt strong { font-family: 'Poppins'; font-size: 0.75rem; font-weight: 800; color: #15161a; display: block; margin-bottom: -1px; }
+        .hero-ui-w-txt span { font-family: 'Manrope'; font-size: 0.45rem; color: #8a8d91; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+        
+        .hero-ui-widget-right { 
+            position: absolute; top: 40px; right: 4vw; z-index: 50; 
+            display: flex; align-items: center; gap: 12px; background: transparent; 
+            color: #fff; font-family: 'Manrope'; text-align: left; opacity: 0.95; 
+        }
+        .hero-time-l { font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; color: #63707c; text-transform: capitalize; }
+        .hero-time-icon svg { width: 34px; height: 34px; stroke: #63707c; stroke-width: 1.5; opacity: 1; }
+        .hero-time-r { font-size: 1rem; font-weight: 400; line-height: 1.1; font-family: 'Poppins'; color: #63707c; text-transform: uppercase;}
+
+        .hero-subject-node {
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            height: 94vh; 
+            max-width: 100vw;
+            pointer-events: none;
+            z-index: 2; 
+            display: flex; align-items: flex-end; justify-content: center;
+            filter: drop-shadow(0 -10px 50px rgba(0,0,0,0.15)) drop-shadow(0 0 45px rgba(255,255,255,0.7));
+        }
+        .hero-subject-node::before {
+            content: ''; position: absolute;
+            bottom: 5%; left: 50%; transform: translateX(-50%);
+            width: 150%; height: 60%;
+            background: radial-gradient(ellipse at bottom, rgba(255, 77, 109, 0.08) 0%, transparent 70%);
+            z-index: -1; filter: blur(40px);
+        }
+        .hero-subject-node img { 
+            height: 100%; width: auto; object-fit: contain;
+            transform: scale(1.08); 
+            transform-origin: bottom center;
+            -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(180deg, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+        }
+
+        .hero-massive-typo { 
+            position: absolute; 
+            top: 45%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            width: max-content; 
+            text-align: center; 
+            font-family: 'Poppins'; font-weight: 800; font-size: clamp(8rem, 24vw, 24rem); 
+            color: #ffffff; line-height: 0.8; letter-spacing: -1.5vw; text-transform: capitalize;
+            z-index: 1;  
+            pointer-events: none;
+            text-shadow: 0 10px 45px rgba(255,255,255, 0.95), 0 0 10px rgba(255, 255, 255, 0.5), 0 5px 15px rgba(0,0,0,0.03); 
+        }
+
+        .hero-action-container { 
+            position: absolute; right: 4vw; top: auto; bottom: 13vh;
+            background: linear-gradient(135deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.05) 100%); 
+            -webkit-backdrop-filter: blur(50px) saturate(200%);
+            backdrop-filter: blur(50px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.6); 
+            box-shadow: 0 35px 65px rgba(0,0,0,0.08), 
+                        inset 0 1px 1px rgba(255,255,255,0.8),
+                        inset 0 0 30px rgba(255,255,255,0.4);
+            border-radius: 20px; padding: 22px 26px; z-index: 25; margin: 0; 
+            display: flex; flex-direction: column; align-items: flex-start; 
+            text-align: left; width: 280px; pointer-events: auto; 
+            overflow: hidden;
+            transform: translateX(40px) scale(0.95); opacity: 0; animation: smoothActionRevealRight 1.4s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: 0.4s;
+        }
+        
+        .hero-action-container::before {
+            content: ''; position: absolute; inset: -50%; z-index: 0; pointer-events: none;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.7) 50%, transparent 60%);
+            animation: holoLightSweep 7s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+            transform: translateY(100%);
+        }
+        @keyframes holoLightSweep { 0%, 20% { transform: translateY(100%) rotate(45deg); } 70%, 100% { transform: translateY(-100%) rotate(45deg); } }
+        @keyframes smoothActionRevealRight { to { opacity: 1; transform: translateX(0) scale(1); } }
+        
+        .hero-action-container p, .hero-action-container a { position: relative; z-index: 5; } 
+        .hero-action-container p { font-size: 0.8rem; line-height: 1.6; font-family: 'Manrope'; color: #212529; margin-bottom: 15px; font-weight: 700; text-shadow: none; }
+        .hero-projects-link { 
+            display: inline-flex; align-items: center; gap: 8px; font-family: 'Poppins'; font-size: 0.75rem; font-weight: 800; color: var(--lotus-pink); 
+            text-decoration: none; position: relative; transition: transform 0.4s var(--fluid-cubic); text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .hero-projects-link svg { stroke-width: 3.5px; width: 14px; stroke: var(--lotus-pink); transition: transform 0.4s cubic-bezier(0.2,0,0,1); }
+        .hero-projects-link:hover { transform: scale(1.05) translateX(3px); }
+        .hero-projects-link:hover svg { transform: translate(5px, -5px); }
+
+        .hero-interactive-safezone { 
+            position: absolute; 
+            bottom: 5vh; width: 100%; left: 0; z-index: 15;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+            pointer-events: none; 
+        }
+        
+        .hero-glass-docks { 
+            width: 92vw; max-width: 800px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(8px, 1.2vw, 12px); pointer-events: auto; align-items: stretch; animation: cinematicSlideDock 1.4s var(--fluid-cubic) forwards; opacity: 0; transform: translateY(20px);
+        }
+        @keyframes cinematicSlideDock { to { transform: translateY(0); opacity: 1; } }
+
+        .h-dock-item {
+            display: flex; flex-direction: row; align-items: center; gap: 8px; flex: 0 1 auto; justify-content: center; 
+            padding: 10px 18px; border-radius: 100px; 
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            backdrop-filter: blur(40px) saturate(180%); 
+            border: 1px solid rgba(255,255,255,0.8); 
+            color: var(--text-dark); 
+            text-shadow: none; 
+            text-decoration: none; font-family: 'Poppins'; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), inset 0 1px 2px rgba(255,255,255,0.8);
+            position: relative; overflow: hidden;
+            transition: transform 0.5s var(--fluid-cubic), box-shadow 0.5s, border-color 0.5s, color 0.5s; 
+        }
+        .h-dock-item::before {
+            content: ''; position: absolute; width: 0%; height: 0%; padding: 50%;
+            border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            background: radial-gradient(circle, rgba(255, 77, 109, 0.1) 0%, transparent 70%); 
+            transition: transform 0.7s var(--fluid-cubic), opacity 0.6s ease; opacity: 0; pointer-events: none;
+        }
+        
+        .dark-flat-svg { width: 16px; fill: transparent; stroke: var(--text-dark); stroke-width: 2.2; transition: transform 0.6s var(--fluid-cubic), stroke 0.4s; filter: none; } 
+        .behance-label { font-weight: 900; font-size: 13px; margin-right: 0px; display: flex; align-items: center; justify-content: center; transition: color 0.4s; }
+        
+        .h-dock-item:hover { 
+            transform: translateY(-8px) scale(1.05); 
+            box-shadow: 0 25px 50px rgba(0,0,0, 0.12), inset 0 0 0 1px rgba(255,255,255,1); 
+            border-color: rgba(255,255,255,1); color: var(--lotus-pink);
+        }
+        .h-dock-item:hover::before { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+        .h-dock-item:hover .dark-flat-svg { transform: rotate(15deg); stroke: var(--lotus-pink); }
+
+        /* ================= 02. DYNAMIC BIO / ABOUT ================= */
+        .section-anchor { padding: 150px 8vw; position: relative; }
+        .split-narrative { display: grid; grid-template-columns: minmax(280px, 30%) 1fr; gap: clamp(40px, 8vw, 100px); align-items: start; }
+        .bio-title-wrapper { position: sticky; top: 140px; display: flex; flex-direction: column; }
+        .sec-num { font-family: 'Poppins'; font-weight: 900; color: rgba(255,77,109,0.05); font-size: 5rem; line-height: 0.8; letter-spacing: -2px; margin-bottom: 10px; text-transform: uppercase; }
+        .sec-head { font-family: 'Playfair Display'; font-size: clamp(2.5rem, 4vw, 3.5rem); margin-top: -25px; z-index: 2; position: relative; font-style: italic; line-height: 1; letter-spacing: -0.5px; }
+        .sec-head-deco-line { height: 2px; width: 60px; background: var(--lotus-pink); margin-top: 20px; display: inline-block; transition: 0.4s; }
+
+        .story-flowing-text p { font-size: 1.15rem; line-height: 1.8; color: var(--text-soft); margin-bottom: 35px; font-weight: 500; font-family: 'Manrope'; text-align: justify; }
+
+        .t-glass-char { opacity: 0; filter: blur(8px); display: inline-block; transition: opacity 0.3s cubic-bezier(0.2,0,0,1), filter 0.5s cubic-bezier(0.2,0.6,0.2,1); }
+        .t-glass-char.g-reveal { opacity: 1; filter: blur(0); }
+        .t-blinker-cursor { position: relative; }
+        .t-blinker-cursor::after { content: '|'; display: inline-block; color: var(--lotus-pink); animation: glblink 1.2s step-end infinite alternate; margin-left: 2px; opacity: 1; }
+        @keyframes glblink { 50% { opacity: 0; } }
+
+        .hlt-text { position: relative; color: var(--text-dark); font-weight: 700; padding: 0 6px; display: inline-block; transition: color 0.4s ease; }
+        .hlt-text::before { content: ''; position: absolute; bottom: 2px; left: 0; width: 100%; height: 8px; background: rgba(255, 77, 109, 0.15); z-index: -1; transition: height 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .hlt-text:hover { color: #fff; }
+        .hlt-text:hover::before { height: 100%; background: var(--lotus-pink); }
+
+        /* ================= X1. NEW ADVANCED LAYER: COGNITIVE ORB / GEOMETRY ================= */
+        .advanced-minimal-showcase { 
+            padding: 80px 8vw; position: relative; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; width: 100%;
+        }
+        .nx-orb-chamber { 
+            position: relative; perspective: 1500px; width: 100%; height: 500px; 
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nx-ring { 
+            position: absolute; border-radius: 50%; border: 1px dashed rgba(255, 77, 109, 0.4); 
+            transform-style: preserve-3d; animation: nxRotator 30s linear infinite; box-shadow: inset 0 0 40px rgba(255, 77, 109, 0.05);
+        }
+        .nx-r1 { width: 380px; height: 380px; animation-duration: 40s; border: 1.5px solid rgba(255, 77, 109, 0.1); border-top: 2px solid var(--lotus-pink); border-right: 2px solid var(--lotus-pink); }
+        .nx-r2 { width: 520px; height: 520px; animation-duration: 20s; animation-direction: reverse; border-color: rgba(255, 77, 109, 0.2); transform: rotateX(60deg); }
+        .nx-r3 { width: 680px; height: 680px; border: 1px solid rgba(200, 200, 200, 0.5); opacity: 0.4; }
+        .nx-central-core { 
+            width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,0.7); backdrop-filter: blur(25px);
+            border: 1.5px solid rgba(255,255,255,1); display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            box-shadow: 0 15px 45px rgba(255, 77, 109, 0.15), inset 0 4px 10px #ffffff; z-index: 5;
+            transition: 0.6s var(--fluid-cubic); font-family: 'Poppins'; font-weight: 900; color: var(--text-dark);
+        }
+        .nx-central-core span { font-size: 0.5rem; text-transform: uppercase; color: var(--lotus-pink); font-weight: 700; letter-spacing: 2px; text-align: center; }
+        .nx-orb-chamber:hover .nx-central-core { transform: scale(1.15); box-shadow: 0 25px 60px rgba(255, 77, 109, 0.3); }
+        @keyframes nxRotator { 0% { transform: rotate(0deg) rotateX(15deg); } 100% { transform: rotate(360deg) rotateX(15deg); } }
+
+        .nx-metric-chip { 
+            position: absolute; background: rgba(255,255,255,0.8); backdrop-filter: blur(15px); padding: 12px 25px; border-radius: 50px; 
+            border: 1px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.03); 
+            font-family: 'Poppins'; font-size: 0.65rem; color: #505050; font-weight: 600; z-index: 10;
+        }
+        .nx-m-top { top: 20%; right: 20%; transform: rotate(3deg); }
+        .nx-m-bot { bottom: 25%; left: 15%; transform: rotate(-4deg); color: var(--lotus-pink);}
+        .nx-metric-chip strong { color: #000; font-size: 0.8rem; display: inline-block; margin-left: 5px; font-weight: 900;}
+
+        /* ================= 03. TECH MARQUEE MINIMAL ================= */
+        .tech-realm { width: 100%; overflow: hidden; background: transparent; padding: 25px 0; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); opacity: 0.85; border-top: 1px solid rgba(255, 77, 109, 0.05); border-bottom: 1px solid rgba(255, 77, 109, 0.05);}
+        .track-wrap { display: flex; width: max-content; gap: 20px; animation: neuralFlow 45s linear infinite; }
+        @keyframes neuralFlow { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .tech-pill { padding: 8px 24px; background: transparent; border-radius: 50px; font-family: 'Poppins'; font-size: 0.75rem; font-weight: 600; color: var(--text-soft); text-transform: uppercase; letter-spacing: 1.5px; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; border: 1px solid rgba(255, 77, 109, 0.15); }
+        .tech-pill::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--lotus-pink); opacity: 0.6; }
+
+        /* ================= 04. CINEMATIC STACKED DECK ANIMATION ================= */
+        #works-station { background: var(--text-dark); color: #fff; padding: 200px 8vw 280px; position: relative; }
+        
+        .deck-wrapper { max-width: 900px; margin: 100px auto 0; position: relative; height: calc(100vh + 300px); }
+        
+        .deck-card {
+            position: absolute; top: 0; left: 0; width: 100%;
+            background: rgba(18, 10, 12, 0.99); backdrop-filter: blur(40px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 40px; 
+            padding: clamp(30px, 4vw, 50px); min-height: 480px;
+            display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.6); 
+            transition: transform 0.6s cubic-bezier(0.1, 0.9, 0.3, 1), opacity 0.5s ease;
+            transform-origin: center top; will-change: transform, opacity;
+        }
+        
+        .card-shadow-plate { font-family: 'Poppins'; font-size: 0.65rem; color: var(--lotus-pink); letter-spacing: 3px; display: block; margin-bottom: 20px; text-transform: uppercase; font-weight: 700; }
+        .dc-title { font-family: 'Playfair Display'; font-size: clamp(2rem, 3.5vw, 2.5rem); margin-bottom: 15px; line-height: 1.15; font-weight: 700; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .dc-desc { color: rgba(255,255,255,0.65); font-family: 'Manrope'; line-height: 1.6; margin-bottom: 30px; font-size: 0.95rem; }
+        .dc-tags span { display: inline-flex; border: 1px solid rgba(255, 77, 109, 0.35); border-radius: 100px; padding: 8px 18px; font-family: 'Poppins'; font-size: 0.65rem; text-transform: uppercase; margin: 0 8px 8px 0; color: rgba(255,255,255,0.9); background: rgba(255,77,109,0.08); }
+
+        .dc-visual { width: 100%; height: 350px; background: #0b0709; border-radius: 30px; overflow: hidden; position: relative; box-shadow: inset 0 0 40px rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; }
+        .dc-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: grayscale(1) contrast(1.2); transition: 0.6s var(--fluid-cubic); }
+        .deck-card:hover .dc-visual img { opacity: 0.9; transform: scale(1.04); filter: grayscale(0.2); }
+
+        /* ================= 05. PROOF OF WORK ================= */
+        .advanced-pow-architect {
+            margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; perspective: 1200px;
+        }
+        .metrics-ui-block {
+            background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4)); backdrop-filter: blur(25px); border: 1px solid rgba(0,0,0,0.05); padding: 40px; border-radius: 35px;
+            box-shadow: inset 0 0 0 1px rgba(255,77,109,0.1), 0 10px 40px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; transition: 0.6s cubic-bezier(0.15,0.8,0.2,1); transform-style: preserve-3d;
+        }
+        .metrics-ui-block::after {
+            content: ''; position: absolute; inset: -20px; border-radius: 50%; opacity: 0.2; filter: blur(40px); z-index: -1;
+            background: radial-gradient(circle at top right, var(--lotus-pink), transparent 60%); transition: 0.8s ease;
+        }
+        .metrics-ui-block:hover { transform: translateY(-10px) rotateX(4deg); box-shadow: 0 25px 50px rgba(255,77,109,0.1); }
+        .metrics-ui-block:hover::after { opacity: 0.6; }
+
+        .metric-pulse { font-family: 'Poppins'; display: flex; justify-content: space-between; align-items: flex-end; width: 100%; margin-top: 30px; }
+        
+        .m-value { font-size: 3.5rem; line-height: 0.8; font-weight: 800; color: var(--text-dark); background: linear-gradient(0deg, var(--text-dark), #9a888c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .m-sublabel { font-size: 0.65rem; text-transform: uppercase; color: var(--lotus-pink); font-weight: 700; letter-spacing: 3px; display: block; margin-bottom: 12px; }
+        
+        .metric-graphic { width: 100%; height: 50px; background-image: repeating-linear-gradient(90deg, transparent 0%, transparent 48%, rgba(255,77,109,0.3) 48%, rgba(255,77,109,0.3) 50%); background-size: 8px 100%; -webkit-mask-image: linear-gradient(90deg, transparent, black, transparent); mask-image: linear-gradient(90deg, transparent, black, transparent); opacity: 0.7; animation: uiScanNode 15s linear infinite; }
+        
+        .p-chart-ui { width: 40px; height: 40px; background: rgba(255,77,109,0.1); border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(255,77,109,0.15); animation: orbitHeart 2s linear infinite; border: 2px solid transparent; border-top-color: var(--lotus-pink); border-right-color: var(--lotus-coral); }
+        .p-chart-ui::before { content: ''; position: absolute; inset: 6px; background: #fff; border-radius: inherit; }
+        
+        @keyframes uiScanNode { from { background-position: 0% center; } to { background-position: 200px center; } }
+        @keyframes orbitHeart { to { transform: rotate(360deg); } }
+
+        .pow-marquee-wrapper { position: relative; margin-top: 60px; padding: 40px 0; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); }
+        .proof-grid-container { display: flex; gap: 35px; width: max-content; animation: powFlow 60s linear infinite; padding: 20px; }
+        @keyframes powFlow { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .proof-grid-container:hover { animation-play-state: paused; }
+        
+        .pow-card {
+            width: 380px; background: #fff; border: 1px solid rgba(0, 0, 0, 0.05); 
+            border-radius: 0 40px 0 40px; padding: 40px; transition: all 0.5s var(--fluid-cubic); position: relative; overflow: hidden;
+            display: flex; flex-direction: column; box-shadow: 0 15px 40px rgba(0,0,0,0.03); flex-shrink: 0;
+        }
+        .pow-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--lotus-pink); transform: scaleY(0); transition: 0.4s; transform-origin: top; }
+        .pow-card:hover { transform: translateY(-12px) scale(1.02); border-color: var(--lotus-pink); box-shadow: 0 40px 70px rgba(255, 77, 109, 0.12); }
+        .pow-card:hover::before { transform: scaleY(1); }
+
+        .pow-tag { font-family: 'Poppins'; font-size: 0.65rem; color: var(--lotus-pink); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; display: block; }
+        .pow-title { font-family: 'Poppins'; font-size: 1.2rem; font-weight: 800; line-height: 1.35; color: var(--text-dark); margin-bottom: 15px; }
+        .pow-desc { font-family: 'Manrope'; font-size: 0.95rem; color: var(--text-soft); line-height: 1.6; margin-bottom: 25px; flex-grow: 1; text-align: justify; }
+        .pow-link { display: inline-flex; align-items: center; gap: 8px; font-family: 'Poppins'; font-size: 0.7rem; font-weight: 800; color: var(--lotus-pink); text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; padding-bottom: 3px; align-self: flex-start; text-transform: uppercase; }
+        .pow-link:hover { border-bottom-color: var(--lotus-pink); }
+
+        /* ================= X2. NEW ADVANCED LAYER: SPATIAL ARCHITECTURE ================= */
+        .spatial-glass-hub { 
+            position: relative; width: 100%; padding: 80px 0 180px 0; perspective: 1800px;
+            display: flex; justify-content: center; align-items: center; 
+        }
+        .lux-iso-planes-container {
+            display: flex; gap: clamp(30px, 4vw, 50px); justify-content: center; transform-style: preserve-3d;
+            transform: rotateX(50deg) rotateZ(-30deg) scale(0.95); transition: transform 0.8s var(--fluid-cubic);
+            filter: drop-shadow(-40px 80px 50px rgba(255,77,109,0.08)); 
+        }
+        .lux-iso-planes-container:hover { transform: rotateX(45deg) rotateZ(-20deg) scale(1); }
+        
+        .lux-plane-card {
+            width: clamp(160px, 15vw, 240px); height: clamp(240px, 22vw, 320px); 
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
+            backdrop-filter: blur(25px); border-radius: 20px; padding: 25px; 
+            border: 1px solid rgba(255,255,255,0.8); transform: translateZ(0);
+            box-shadow: inset 0 2px 5px rgba(255,255,255,1), -10px 10px 30px rgba(0,0,0,0.06);
+            display: flex; flex-direction: column; transition: all 0.6s var(--fluid-cubic); cursor: crosshair;
+        }
+        .lux-plane-card:nth-child(1) { transform: translateZ(30px); }
+        .lux-plane-card:nth-child(3) { transform: translateZ(60px); }
+
+        .lux-plane-card:hover { transform: translateZ(90px) translateY(-15px); background: #ffffff; box-shadow: inset 0 2px 5px rgba(255,255,255,1), -25px 35px 50px rgba(255, 77, 109, 0.15); border-color: rgba(255,77,109,0.3);}
+        
+        .lx-label { font-family: 'Poppins'; font-size: 0.65rem; color: var(--lotus-pink); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .lx-h3 { font-family: 'Playfair Display'; font-size: 1.8rem; line-height: 1; font-weight: 700; color: #111; margin-top: auto; }
+
+        /* ================= 06. NEURAL AUTH ================= */
+        .hw-grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 70px; }
+        
+        .hw-card-2026 {
+            position: relative; border-radius: 30px; padding: 3px; z-index: 1; text-align: left;
+            overflow: hidden; cursor: crosshair; transition: transform 0.6s var(--fluid-cubic); box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+        }
+        .hw-inner-shell { background: rgba(255,255,255,0.85); backdrop-filter: blur(25px); height: 100%; width: 100%; border-radius: 27px; padding: 35px 30px; display: flex; flex-direction: column; gap: 20px; border: 1px solid rgba(255,255,255,1); z-index: 3; position: relative; overflow: hidden; }
+        .hw-card-2026:hover { transform: translateY(-10px); }
+        
+        .hw-conic-glow {
+            position: absolute; width: 100%; height: 250%; top: -75%; left: 0%; transform-origin: center center; opacity: 0; background: conic-gradient(from 180deg, transparent 50%, var(--lotus-pink) 65%, var(--lotus-peach) 85%, transparent 100%); z-index: 1; animation: spinnerNode 5s linear infinite; transition: opacity 0.6s ease;
+        }
+        .hw-card-2026:hover .hw-conic-glow { opacity: 1; }
+        .hw-card-2026:hover { box-shadow: 0 25px 50px rgba(255,77,109,0.18); }
+        
+        .hw-i-ico { position: relative; width: 60px; height: 60px; border-radius: 20px; background: rgba(255,77,109,0.04); display: flex; align-items: center; justify-content: center; color: var(--lotus-pink); transition: 0.5s var(--fluid-cubic); box-shadow: inset 0 0 0 1px rgba(255,77,109,0.1); flex-shrink: 0; }
+        .hw-card-2026:hover .hw-i-ico { transform: scale(1.1) rotate(5deg); background: var(--masika-gradient); color: #fff; box-shadow: inset 0 0 0 0px transparent; }
+        .hw-i-ico svg { width: 24px; stroke-width: 2.5; position: relative; z-index: 10; }
+        
+        .hw-i-core h4 { font-family: 'Poppins'; font-size: 1.25rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; line-height: 1.3; }
+        .hw-i-core p { font-family: 'Manrope'; font-size: 0.95rem; font-weight: 600; color: var(--text-soft); line-height: 1.6; }
+        .hw-i-meta { margin-top: auto; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 20px; font-family: 'Poppins'; font-size: 0.7rem; font-weight: 700; color: var(--lotus-pink); letter-spacing: 1px; display: flex; align-items: center; gap: 6px; text-transform: uppercase; }
+
+        @keyframes spinnerNode { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* ================= 07. ADVANCED SUPER-MINIMAL FOOTER ================= */
+        #master-footer { 
+            background: #000; color: #fff; padding: 160px 8vw 100px; position: relative; 
+            overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); 
+        }
+
+        .footer-glow-grid { 
+            position: absolute; inset: 0; opacity: 0.2; pointer-events: none; z-index: 0;
+            background-image: linear-gradient(rgba(255,77,109,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,77,109,0.1) 1px, transparent 1px);
+            background-size: 5vw 5vw; -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1), transparent 75%); mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1), transparent 75%);
+        }
+        
+        .f-orb-anim { 
+            position: absolute; width: 450px; height: 450px; background: radial-gradient(circle, rgba(255,77,109,0.15) 0%, transparent 70%);
+            filter: blur(40px); border-radius: 50%; top: -100px; right: -100px; z-index: 0; 
+            animation: orbTraverse 25s infinite alternate cubic-bezier(0.3, 0.7, 0.4, 1.2); 
+            pointer-events: none; 
+        }
+        @keyframes orbTraverse { 
+            0% { transform: translate(0, 0) scale(1); } 
+            100% { transform: translate(-80vw, 30vh) scale(1.5); opacity: 0.5; } 
+        }
+
+        .f-main-grid { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1.5fr; gap: 80px; position: relative; z-index: 10; margin-bottom: 120px; }
+        
+        /* Fixed explicitly mapping overlapping issue properly fixing bounded elements securely effectively purely */
+        .f-brand { display: flex; flex-direction: column; align-items: flex-start; z-index: 5; position: relative; }
+        .f-brand .f-big-v { 
+            font-family: 'Poppins'; font-size: clamp(3.5rem, 6vw, 5rem); font-weight: 900; line-height: 1; margin-bottom: 25px; 
+            letter-spacing: -2px; display: block; position: relative; white-space: nowrap; padding-bottom: 10px;
+        }
+        .f-brand .f-big-v::after {
+            content: 'Bikram'; position: absolute; top: 0; left: 0;
+            background: linear-gradient(0deg, var(--lotus-pink), transparent); -webkit-background-clip: text; background-clip: text; color: transparent;
+            z-index: -1; transform: translateY(4px) translateX(3px); filter: blur(8px); opacity: 0.7;
+            animation: breathingShadow 5s infinite alternate ease-in-out;
+        }
+        
+        .f-brand h2 { font-family: 'Poppins'; font-size: 1.15rem; font-weight: 800; letter-spacing: 6px; color: var(--lotus-pink); text-transform: uppercase; margin-bottom: 30px; display: block; }
+        /* Adjusted Text Alignment As Specifically Requested in Prompt for Cleaner Display */
+        .f-brand p { color: rgba(255,255,255,0.45); line-height: 1.8; max-width: 440px; font-size: 0.95rem; font-family: 'Manrope'; text-align: justify; margin-top: 5px; }
+        
+        .f-links-box h4 { font-family: 'Poppins'; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 5px; color: #666; margin-bottom: 35px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .f-links-box ul { list-style: none; }
+        .f-links-box li { margin-bottom: 20px; }
+        .f-links-box a { 
+            text-decoration: none; color: rgba(255,255,255,0.7); transition: 0.4s var(--fluid-cubic); 
+            font-size: 0.85rem; font-family: 'Poppins'; font-weight: 500; display: flex; align-items: center; gap: 10px;
+        }
+        .f-links-box a svg { width: 14px; height: 14px; stroke: var(--lotus-pink); transition: stroke 0.4s var(--fluid-cubic); flex-shrink: 0; }
+        .f-links-box a:hover { color: #fff; transform: translateX(5px); }
+        .f-links-box a:hover svg { stroke: #fff; }
+
+        .f-metrics-hub { display: flex; flex-direction: column; gap: 15px; }
+        .metric-tag { 
+            background: rgba(255,255,255,0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.06); 
+            transition: all 0.4s ease; backdrop-filter: blur(10px); display: flex; flex-direction: column;
+            overflow: hidden; position: relative;
+        }
+        .metric-tag::before {
+            content:''; position: absolute; top:0; left: -100%; height: 2px; width: 100%;
+            background: linear-gradient(90deg, transparent, var(--lotus-pink), transparent);
+            animation: tagScanner 4s linear infinite; opacity: 0; transition: opacity 0.5s;
+        }
+        .metric-tag:hover::before { opacity: 1; }
+        @keyframes tagScanner { 100% { left: 100%; } }
+
+        .f-metric-ping { 
+            width: 8px; height: 8px; border-radius: 50%; background: var(--lotus-pink);
+            display: inline-block; position: relative; box-shadow: 0 0 10px var(--lotus-pink); margin-right: 12px;
+        }
+        .f-metric-ping::after { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid var(--lotus-pink); animation: radioPing 2s ease-out infinite; opacity: 0; }
+        @keyframes radioPing { 0% { transform: scale(0.2); opacity: 1; border-width: 2px;} 100% { transform: scale(1.5); opacity: 0; border-width: 0.5px; } }
+        
+        .metric-tag span { font-family: 'Poppins'; font-size: 0.65rem; color: #888; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center;}
+        .metric-tag p { font-family: 'Playfair Display'; font-size: 1.15rem; color: #fff; font-weight: 700; }
+        .metric-tag:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,77,109,0.3); transform: scale(1.02); }
+
+        .soc-bar-horizontal { 
+            display: flex; gap: 20px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; justify-content: space-between; align-items: center; position: relative; z-index: 10;
+        }
+        .soc-pill { 
+            display: inline-flex; align-items: center; gap: 15px; padding: 14px 28px; border-radius: 50px; 
+            background: rgba(255,255,255,0.03); border: 1.5px solid rgba(255,255,255,0.1); 
+            text-decoration: none; color: #fff; font-family: 'Poppins'; font-size: 0.8rem; font-weight: 600; 
+            transition: 0.5s var(--fluid-cubic); text-transform: uppercase;
+        }
+        .soc-pill:hover { background: #fff; color: #000; transform: translateY(-8px) scale(1.05); border-color: #fff; box-shadow: 0 15px 40px rgba(255,255,255,0.15); }
+        .soc-pill svg { width: 18px; stroke-width: 2.5; }
+
+        .f-legal { display: flex; gap: 40px; opacity: 0.4; font-family: 'Poppins'; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* MOBILE ADJUSTMENTS RESPONSIVE */
+        @media(max-width: 1200px) { .f-main-grid { grid-template-columns: 2fr 1fr 1fr; } .hw-grid-layout { grid-template-columns: 1fr; gap: 20px; } }
+        @media(max-width: 991px) {
+            .split-narrative, .f-main-grid, .soc-bar-horizontal, .advanced-pow-architect { grid-template-columns: 1fr; gap: 40px; text-align: left; }
+            .hero-massive-typo { font-size: 28vw; top: 38%; }
+            .hero-subject-node { height: 80vh; }
+            .hero-interactive-safezone { bottom: 2vh; }
+            
+            .hero-action-container { right: 4vw; top: auto; bottom: 12vh; max-width: 240px; padding: 18px 20px; background: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,1); -webkit-backdrop-filter: none; backdrop-filter: none;}
+            
+            .deck-wrapper { height: auto !important; margin-bottom: 0px;}
+            .deck-card { grid-template-columns: 1fr; position: relative; top: 0; opacity: 1 !important; transform: none !important; margin-bottom: 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); z-index: 1 !important; pointer-events: auto !important;}
+            .dc-visual { height: 250px; }
+
+            .hero-glass-docks { justify-content: center; gap: 8px; width: 95vw; }
+            .h-dock-item { min-width: 40%; padding: 12px; font-size: 0.70rem; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);}
+            .f-brand .f-big-v { font-size: 4rem; }
+            .lux-iso-planes-container { flex-direction: column; transform: none; filter: none; gap: 20px;}
+            .lux-iso-planes-container:hover { transform: none; }
+            .lux-plane-card, .lux-plane-card:nth-child(n) { transform: none !important; width: 100%; height: auto;}
+            
+            .hero-ui-widget-right, .hero-ui-widget-left { transform: scale(0.85); transform-origin: left top; top: 20px; }
+            .hero-ui-widget-right { top: 20px; transform-origin: right top; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SECTION 1: HERO -->
+<section id="vp-hero">
+    <div class="hero-grain-overlay"></div>
+    <div class="hero-bottom-fog"></div>
+    
+    <div class="hero-ui-widget-left">
+        <img src="/static/logo.png" onerror="this.src='https://ui-avatars.com/api/?name=BD&background=FF4D6D&color=fff&rounded=true'" alt="BD Symbol" class="hero-ui-w-avatar">
+        <div class="hero-ui-w-txt">
+            <strong>Dr. B. Das<sup style="font-size:8px;">®</sup></strong>
+            <span>Research approved annually</span>
+        </div>
+    </div>
+
+    <div class="hero-ui-widget-right">
+        <div class="hero-time-l">
+            <span>Local</span><br><span>time</span>
+        </div>
+        <div class="hero-time-icon">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="hero-time-r" id="hero-live-clock">08:16:54<br>PM</div>
+    </div>
+
+    <!-- REAR TEXT PLANE -->
+    <div class="hero-massive-typo">Bikramaditya</div>
+
+    <!-- EXACTLY AS REQUESTED: Updated path strictly to static/bikrmaditya.png without any other structural shifts -->
+    <div class="hero-subject-node">
+        <img src="static/bikrmaditya.png" alt="Dr. Bikramaditya Das Portrait Base" onerror="this.src='https://ui-avatars.com/api/?name=BD&background=0a0506&color=fff&size=512&rounded=true'">
+    </div>
+
+    <div class="hero-action-container">
+        <p>To innovate and research state-of-art techniques for autonomous robotics, navigating communication constraints with 10+ years of scholarly excellence.</p>
+        <a href="#works-station" class="hero-projects-link">View Research <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+    <!-- ABSOLUTE FOREGROUND INTERACTIVE CAPSULE -->
+    <div class="hero-interactive-safezone">
+        <!-- HIGH-END "APPLE VISION PRO" ESQUE DOCK ITEMS SMALL MINIMAL GLOSSY NATIVELY REACTING  -->
+        <div class="hero-glass-docks">
+            <a href="mailto:adibik09@gmail.com" class="h-dock-item"><svg class="dark-flat-svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> Contact Me</a>
+            
+            <a href="https://www.researchgate.net/profile/Bikramaditya_Das" target="_blank" rel="noopener noreferrer" class="h-dock-item"><span class="behance-label">R<sup>G</sup></span> ResearchGate</a>
+            
+            <a href="#" class="h-dock-item" target="_blank" rel="noopener noreferrer"><svg class="dark-flat-svg" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg> Linkedin</a>
+            
+            <a href="https://www.bput.ac.in" class="h-dock-item" target="_blank" rel="noopener noreferrer"><svg class="dark-flat-svg" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg> University Info</a>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 2: MARQUEE -->
+<div class="tech-realm">
+    <div class="track-wrap">
+        <div class="tech-pill">Autonomous Underwater Vehicles (AUVs)</div>
+        <div class="tech-pill">Underwater Acoustic Comm</div>
+        <div class="tech-pill">Distributed Path Consensus</div>
+        <div class="tech-pill">Multi-Agent System Control</div>
+        <div class="tech-pill">Signal Processing Overlays</div>
+        <div class="tech-pill">MUD over MIMO-OFDM</div>
+        <div class="tech-pill">Smart Antenna & IoT</div>
+        <div class="tech-pill">Autonomous Underwater Vehicles (AUVs)</div>
+    </div>
+</div>
+
+<!-- SECTION 3: STORY (GLOSIAN TYPING JS) -->
+<section class="section-anchor" id="vp-genesis-text-group">
+    <div class="split-narrative">
+        <div class="bio-title-wrapper">
+            <div class="sec-num">01.</div>
+            <h2 class="sec-head">Academic<br>Genesis.</h2>
+            <div class="sec-head-deco-line"></div>
+        </div>
+        <div class="story-flowing-text vp-typing-target">
+            <p>I operate at the absolute convergence point of <span class="hlt-text">electronic communication, robotic autonomy, and multi-agent system control.</span> Exploring the underwater domain is my scholarly calling, tackling the intricate communication constraints in GPS-denied environments.</p>
+            <p>Through continuous research backed by core science bodies like SERB and AICTE, I have dedicated a decade to advancing AUV path planning and IoT-enabled overlays. Developing sustainable network frameworks allows our deep-sea deployments to map effectively—ensuring communication topologies feel <span class="hlt-text">as resilient as nature</span> and as precise as modern engineering.</p>
+        </div>
+    </div>
+</section>
+
+<!-- X1. NEW ADVANCED LAYER: COGNITIVE ORB / GEOMETRY -->
+<section class="advanced-minimal-showcase section-anchor">
+    <div class="split-narrative" style="position: absolute; top:0; left: 8vw; z-index:10; pointer-events: none;">
+        <div class="bio-title-wrapper" style="top:50px;">
+            <div class="sec-num" style="color:rgba(255,77,109,0.04);">Φ</div>
+            <h2 class="sec-head" style="color:#222;">Research<br>Topology.</h2>
+        </div>
+    </div>
+    
+    <div class="nx-orb-chamber">
+        <div class="nx-ring nx-r1"></div>
+        <div class="nx-ring nx-r2"></div>
+        <div class="nx-ring nx-r3"></div>
+        
+        <div class="nx-central-core">
+            <h3 style="line-height:1;">A.U.V</h3>
+            <span>Logic</span>
+        </div>
+
+        <div class="nx-metric-chip nx-m-top">Interference Mitigation <strong>99.8%</strong></div>
+        <div class="nx-metric-chip nx-m-bot">UWA Communication Efficiency <strong>100%</strong></div>
+    </div>
+</section>
+
+<!-- SECTION 4: MISSION DEPLOYMENTS -->
+<section id="works-station">
+    <div class="split-narrative" style="color:#fff; margin-bottom: 80px;">
+        <div class="bio-title-wrapper" style="top:0;">
+            <div class="sec-num" style="color:rgba(255,255,255,0.06);">02.</div>
+            <h2 class="sec-head">Project<br>Deployments.</h2>
+            <div class="sec-head-deco-line"></div>
+        </div>
+    </div>
+
+    <div class="deck-wrapper" id="project-deck">
+        
+        <div class="deck-card">
+            <div class="dc-txt">
+                <span class="card-shadow-plate">Project 1 // Infrastructure Core</span>
+                <h3 class="dc-title">Modernization of Comm Laboratory</h3>
+                <p class="dc-desc">Acted as the Principal Investigator to fundamentally modernize the communication laboratory at the ETE department in VSSUT, executing a 7.97L INR project sanctioned completely under the AICTE policy bounds.</p>
+                <div class="dc-tags"><span>AICTE MODROB</span><span>Principal Investigator</span><span>Hardware Setup</span></div>
+            </div>
+            <!-- FIXED ROBUST TOPIC IMAGERY: Tech circuit structure -->
+            <div class="dc-visual"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Hardware Infrastructure Setup"></div>
+        </div>
+
+        <div class="deck-card">
+            <div class="dc-txt">
+                <span class="card-shadow-plate">Project 2 // Legal Setup Frame</span>
+                <h3 class="dc-title">Creation and Management IPR Cell</h3>
+                <p class="dc-desc">Managed and instituted the core foundation of the Intellectual Property Rights (IPR) Cell for VSSUT Burla acting as Principal Investigator establishing institutional architecture managing innovations properly.</p>
+                <div class="dc-tags"><span>IPR Administration</span><span>Principal Investigator</span></div>
+            </div>
+            <!-- FIXED ROBUST TOPIC IMAGERY: Professional Workspace Legal Frame -->
+            <div class="dc-visual"><img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="IPR Workspace Foundation"></div>
+        </div>
+
+        <div class="deck-card">
+            <div class="dc-txt">
+                <span class="card-shadow-plate">R&D Scale Project // ANRF, DST India</span>
+                <h3 class="dc-title">Research & Development (SERB)</h3>
+                <p class="dc-desc">Managing and actively executing major continuous research and development pipelines driven directly by a heavily sanctioned project (Rs. 29,90,070) originating through ANRF framework.</p>
+                <div class="dc-tags"><span>DST Protocol</span><span>R&D Subsystems</span></div>
+            </div>
+            <!-- FIXED ROBUST TOPIC IMAGERY: Research overlay and development framework base -->
+            <div class="dc-visual"><img src="https://images.unsplash.com/photo-1518104593124-ac2eaeb42bf0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="R&D Science Data Layers Check"></div>
+        </div>
+        
+        <div class="deck-card">
+            <div class="dc-txt">
+                <span class="card-shadow-plate">Primary Abstract Output</span>
+                <h3 class="dc-title">Autonomous Underwater Control</h3>
+                <p class="dc-desc">Engineering novel topologies governing robust communication constraints handling path planning arrays operating over Autonomous Underwater Vehicles navigating GPS-denied environments efficiently.</p>
+                <div class="dc-tags"><span>UWA Systems</span><span>Multi-Agent AI</span><span>Telemetry Paths</span></div>
+            </div>
+            <!-- FIXED ROBUST TOPIC IMAGERY: System logic architecture/Sub overlay mappings  -->
+            <div class="dc-visual"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Overlay System Grid Architecture Nodes"></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- SECTION 5: PROOF OF WORK -->
+<section class="section-anchor">
+    <div class="split-narrative">
+        <div class="bio-title-wrapper">
+            <div class="sec-num">03.</div>
+            <h2 class="sec-head">Proof of<br>Research.</h2>
+            <div class="sec-head-deco-line"></div>
+        </div>
+        <div class="advanced-pow-architect">
+            <div class="metrics-ui-block">
+                <span class="m-sublabel">International Discoveries</span>
+                <div class="p-chart-ui"></div>
+                <div class="metric-pulse"><span class="m-value">28+</span></div>
+                <span style="font-family:'Poppins';font-size:0.75rem;font-weight:700;margin-top:5px;opacity:0.6;">High-Impact Publications</span>
+                <div class="metric-graphic"></div>
+            </div>
+            <div class="metrics-ui-block" style="background: rgba(255, 255, 255, 0.5);">
+                <span class="m-sublabel">Academic Supervision Standard</span>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke:var(--lotus-pink); stroke-width:2;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <div class="metric-pulse"><span class="m-value" style="font-size: 2.2rem;">Tier 01</span></div>
+                <span style="font-family:'Poppins';font-size:0.75rem;font-weight:700;margin-top:5px;opacity:0.6;">Guiding Dozens of Researchers Globally</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="pow-marquee-wrapper">
+        <div class="proof-grid-container">
+            <div class="pow-card">
+                <span class="pow-tag">SCI-Indexed Impact (IF-1.8)</span>
+                <h4 class="pow-title">Multi-AUVs Operating Research</h4>
+                <p class="pow-desc">"A path planning algorithm for multi-AUVs operating in unstructured underwater terrain environments." Published in Ships and Offshore Structures, 2025.</p>
+                <a href="https://www.researchgate.net/profile/Bikramaditya_Das" target="_blank" rel="noopener noreferrer" class="pow-link">Explore Narrative</a>
+            </div>
+
+            <div class="pow-card">
+                <span class="pow-tag">SCIE-Indexed Output (IF-2.9)</span>
+                <h4 class="pow-title">Bionic Optimization Models</h4>
+                <p class="pow-desc">Formulated hybrid Path Planning logic actively incorporating natural swarm mechanics and distributed machine-level decision constraints explicitly developed for sub-sea domains.</p>
+                <a href="https://doi.org/10.3390/jmse11040761" target="_blank" rel="noopener noreferrer" class="pow-link">View Journal</a>
+            </div>
+
+            <div class="pow-card">
+                <span class="pow-tag">Global Patent Innovation</span>
+                <h4 class="pow-title">MIMO-OFDM Error Checks</h4>
+                <p class="pow-desc">Multiuser detection solutions evaluating acoustic parameters integrating binary hybrid bionic variants optimizing severe fading inside fluid dynamic topologies rapidly.</p>
+                <a href="https://doi.org/10.1007/s42235-021-0018-y" target="_blank" rel="noopener noreferrer" class="pow-link">Protocol Log</a>
+            </div>
+
+            <div class="pow-card">
+                <span class="pow-tag">Scholarly Authoring Base</span>
+                <h4 class="pow-title">Extensive Statistical Books</h4>
+                <p class="pow-desc">Composed crucial literature dictating narrow-band physical layer interference procedures heavily utilized by regional postgraduate studies. Author: Statistical linear time models.</p>
+                <a href="https://www.researchgate.net/profile/Bikramaditya_Das" target="_blank" rel="noopener noreferrer" class="pow-link">Verify Literature</a>
+            </div>
+
+            <!-- Duplicates for marquee loop -->
+            <div class="pow-card">
+                <span class="pow-tag">SCI-Indexed Impact (IF-1.8)</span>
+                <h4 class="pow-title">Multi-AUVs Operating Research</h4>
+                <p class="pow-desc">"A path planning algorithm for multi-AUVs operating in unstructured underwater terrain environments." Published in Ships and Offshore Structures, 2025.</p>
+                <a href="https://www.researchgate.net/profile/Bikramaditya_Das" target="_blank" rel="noopener noreferrer" class="pow-link">Explore Narrative</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- X2. ADVANCED LAYER: SPATIAL ARCHITECTURE -->
+    <section class="spatial-glass-hub section-anchor">
+         <div class="lux-iso-planes-container">
+             <div class="lux-plane-card">
+                 <span class="lx-label">Scalability Architecture</span>
+                 <h3 class="lx-h3">Swarm Optimization Systems</h3>
+             </div>
+             <div class="lux-plane-card">
+                <span class="lx-label">Electronic Frontend Limits</span>
+                <h3 class="lx-h3">Channel Estimate Topologies</h3>
+            </div>
+            <div class="lux-plane-card">
+                <span class="lx-label">Telemetry Protection</span>
+                <h3 class="lx-h3">Renewable Photo Fault Diagnostic</h3>
+            </div>
+            <div class="lux-plane-card" style="background:var(--masika-gradient);">
+                <span class="lx-label" style="color:#fff;">Publishing Standard</span>
+                <h3 class="lx-h3" style="color:#fff; padding-top:20px;">Review</h3>
+                <svg viewBox="0 0 24 24" width="28" style="stroke:#fff; stroke-width:1.5; margin-top:20px; fill:none;"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+         </div>
+    </section>
+
+    <!-- AUTH SECTION MINIMIZED AND PERFECT -->
+    <div class="split-narrative" style="margin-top: 100px;">
+        <div class="bio-title-wrapper">
+            <div class="sec-num" style="opacity:0.1;">04.</div>
+            <h2 class="sec-head" style="color:var(--lotus-pink);">Auth Node.</h2>
+            <div class="sec-head-deco-line"></div>
+        </div>
+    </div>
+
+    <div class="hw-grid-layout">
+        <!-- Auth Card 01 -->
+        <div class="hw-card-2026">
+            <div class="hw-conic-glow"></div>
+            <div class="hw-inner-shell">
+                <div class="hw-i-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3"/></svg></div>
+                <div class="hw-i-core">
+                    <h4>Ph.D. in Engineering Node</h4>
+                    <p>Electrical Engineering focus established rigorously mapping algorithms around robust satellite networking layers.</p>
+                </div>
+                <div class="hw-i-meta"><span style="width: 8px; height: 8px; background:var(--lotus-pink); border-radius: 50%;"></span>Veer Surendra Sai University</div>
+            </div>
+        </div>
+
+        <!-- Auth Card 02 -->
+        <div class="hw-card-2026">
+            <div class="hw-conic-glow"></div>
+            <div class="hw-inner-shell">
+                <div class="hw-i-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                <div class="hw-i-core">
+                    <h4>M.Tech Framework Authority</h4>
+                    <p>Master of Technology mapping digital processing mechanisms through dense analog models handling telemetry accurately.</p>
+                </div>
+                <div class="hw-i-meta"><span style="width: 8px; height: 8px; background:var(--lotus-pink); border-radius: 50%;"></span>NIT Rourkela Validation</div>
+            </div>
+        </div>
+
+        <!-- Auth Card 03 -->
+        <div class="hw-card-2026">
+            <div class="hw-conic-glow"></div>
+            <div class="hw-inner-shell">
+                <div class="hw-i-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                <div class="hw-i-core">
+                    <h4>Institutional Teaching Base</h4>
+                    <p>Supervising Ph.D structures continually operating large development protocols across core regional academies consistently.</p>
+                </div>
+                <div class="hw-i-meta"><span style="width: 8px; height: 8px; background:var(--lotus-pink); border-radius: 50%;"></span>Assoc. Professor Logic</div>
+            </div>
+        </div>
+
+        <!-- Auth Card 04 -->
+        <div class="hw-card-2026">
+            <div class="hw-conic-glow"></div>
+            <div class="hw-inner-shell">
+                <div class="hw-i-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2L2 22h20L12 2z"/></svg></div>
+                <div class="hw-i-core">
+                    <h4>State Core Examination Protocol</h4>
+                    <p>Administering admission metrics maintaining comprehensive infrastructure mapping local technological examinations securely over 10+ years.</p>
+                </div>
+                <div class="hw-i-meta"><span style="width: 8px; height: 8px; background:var(--lotus-pink); border-radius: 50%;"></span>OJEE Committee Bound</div>
+            </div>
+        </div>
+        
+        <!-- Auth Card 05 -->
+        <div class="hw-card-2026">
+            <div class="hw-conic-glow"></div>
+            <div class="hw-inner-shell">
+                <div class="hw-i-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+                <div class="hw-i-core">
+                    <h4>Training & System Oversight</h4>
+                    <p>Functioning efficiently organizing short-term TEQIP-II programs covering instrumental design configurations bridging academics robustly.</p>
+                </div>
+                <div class="hw-i-meta"><span style="width: 8px; height: 8px; background:var(--lotus-pink); border-radius: 50%;"></span>TEQIP-II FDP Lead</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 7: ADVANCED SUPER-MINIMAL FOOTER (CLEAN ALIGNMENT AND NEW ICONS, SIZE RETAINED STRICTLY) -->
+<footer id="master-footer">
+    <div class="f-orb-anim"></div>
+    <div class="footer-glow-grid"></div>
+
+    <div class="f-main-grid">
+        <div class="f-brand">
+            <span class="f-big-v">Bikram</span>
+            <h2>HOD, ECE - CUPGS, BPUT</h2>
+            <p>Architecting robust network limits modeling high-frequency constraints within underwater boundaries natively spanning ten progressive developmental research blocks successfully executing structural arrays completely autonomously.</p>
+        </div>
+        
+        <div class="f-links-box">
+            <h4>Core Operations</h4>
+            <!-- Advanced visual SVGs inserted cleanly onto pure baseline specs -->
+            <ul>
+                <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3" stroke="currentColor"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor"/></svg> AUV Architectures</a></li>
+                <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 22h14a2 2 0 002-2V7.5L14.5 2H6a2 2 0 00-2 2v4" stroke="currentColor"/><polyline points="14 2 14 8 20 8" stroke="currentColor"/><path d="M3 15h6M3 19h6M6 12l3 3-3 3" stroke="currentColor"/></svg> Channel Signals Data</a></li>
+                <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2" stroke="currentColor"/><polyline points="2 17 12 22 22 17" stroke="currentColor"/><polyline points="2 12 12 17 22 12" stroke="currentColor"/></svg> Deep Underwater Overlays</a></li>
+            </ul>
+        </div>
+
+        <div class="f-links-box">
+            <h4>System Routing Protocols</h4>
+            <!-- Advanced visual SVGs inserted cleanly onto pure baseline specs -->
+            <ul>
+                <li><a href="https://www.researchgate.net/profile/Bikramaditya_Das" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor"/></svg> Publication Port Base</a></li>
+                <li><a href="mailto:adibik09@gmail.com" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor"/><polyline points="22,6 12,13 2,6" stroke="currentColor"/></svg> Electronic Messaging</a></li>
+            </ul>
+        </div>
+
+        <div class="f-metrics-hub">
+            <h4>Node Operating Code Stat</h4>
+            <div class="metric-tag">
+                <span><i class="f-metric-ping"></i>Network Validity Log</span>
+                <p>Verified. Academia 1.0</p>
+            </div>
+            <div class="metric-tag">
+                <span><i class="f-metric-ping" style="animation-delay: 0.5s;"></i>Physical System Location</span>
+                <p>BPUT Facility, Rourkela Odisha</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="soc-bar-horizontal">
+        <a href="mailto:adibik09@gmail.com" target="_blank" rel="noopener noreferrer" class="soc-pill">Transmit Comms <svg viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.researchgate.net/profile/Bikramaditya_Das" target="_blank" rel="noopener noreferrer" class="soc-pill">Verification View <svg viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></a>
+        <div class="f-legal">
+            <span>© 2026 DR. BIKRAMADITYA DAS PLATFORM. ALL RIGHTS RESERVED.</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    /* LIVE TIME LOGIC */
+    function renderLiveClock() {
+        const el = document.getElementById('hero-live-clock');
+        if(el) {
+            const dt = new Date();
+            let hrs = dt.getHours(); let mins = dt.getMinutes(); let secs = dt.getSeconds();
+            let ap = hrs >= 12 ? 'PM' : 'AM';
+            hrs = hrs % 12; hrs = hrs ? hrs : 12;
+            mins = mins < 10 ? '0' + mins : mins;
+            secs = secs < 10 ? '0' + secs : secs;
+            el.innerHTML = hrs + ':' + mins + ':' + secs + '<br>' + ap;
+        }
+    }
+    setInterval(renderLiveClock, 1000);
+    renderLiveClock();
+
+    /* DYNAMIC GLOSIAN TEXT TYPEWRITER ANIMATION (TEXT GLITCH COMPLETELY PATCHED & SOLVED!) */
+    function setupGlosianTypingEffect() {
+        const targets = document.querySelectorAll('.vp-typing-target p');
+        
+        targets.forEach((pLine) => {
+            pLine.classList.add('t-blinker-cursor');
+            wrapTextNodes(pLine);
+        });
+
+        function wrapTextNodes(element) {
+            Array.from(element.childNodes).forEach(node => {
+                if (node.nodeType === 3) {
+                    const frag = document.createDocumentFragment();
+                    const chars = node.nodeValue.split('');
+                    chars.forEach(char => {
+                        let s = document.createElement('span');
+                        s.className = 't-glass-char';
+                        // BUG FIX PREVENTING SPACE EROSION HERE: 
+                        if (char === ' ') {
+                            s.innerHTML = '&nbsp;';
+                        } else {
+                            s.textContent = char;
+                        }
+                        frag.appendChild(s);
+                    });
+                    element.replaceChild(frag, node);
+                } else if (node.nodeType === 1) {
+                    wrapTextNodes(node); 
+                }
+            });
+        }
+
+        const typingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    let delayMs = 0;
+                    const characters = entry.target.querySelectorAll('.t-glass-char');
+                    characters.forEach(spanNode => {
+                        setTimeout(() => { spanNode.classList.add('g-reveal'); }, delayMs);
+                        delayMs += 10; 
+                    });
+                    setTimeout(() => entry.target.classList.remove('t-blinker-cursor'), delayMs + 300);
+                    typingObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        targets.forEach(t => typingObserver.observe(t));
+    }
+    setupGlosianTypingEffect();
+
+    /* DYNAMIC CINEMATIC STACKING SCRIPT */
+    const deckContainer = document.getElementById('project-deck');
+    const cards = document.querySelectorAll('.deck-card');
+
+    window.addEventListener('scroll', () => {
+        const containerRect = deckContainer.getBoundingClientRect();
+        
+        const viewportStart = window.innerHeight * 0.9;
+        const progressRange = window.innerHeight + deckContainer.offsetHeight;
+        const scrollPercent = Math.max(0, Math.min(1, (viewportStart - containerRect.top) / progressRange));
+        
+        if (containerRect.top < window.innerHeight && containerRect.bottom > -200) {
+            cards.forEach((card, i) => {
+                
+                const seqMultiplierLimit = 1.0 / cards.length;
+                const threshold = (i * seqMultiplierLimit) * 1.15; 
+                const rawProgress = (scrollPercent * 1.5) - threshold;
+                const cardProgress = Math.max(0, Math.min(1, rawProgress * 3.0)); 
+                
+                if (cardProgress > 0 && window.innerWidth > 991) {
+                     
+                    const stackedOffset = i * 25; 
+                    const slideUp = (1 - cardProgress) * 500; 
+                    
+                    const currentScale = 0.9 + (cardProgress * 0.1) - (i * 0.015);
+                    
+                    card.style.transform = `translateY(${slideUp + stackedOffset}px) scale(${currentScale})`;
+                    card.style.opacity = cardProgress;
+                    card.style.zIndex = 100 + i;
+                    card.style.pointerEvents = cardProgress > 0.9 ? 'auto' : 'none';
+                } else if (window.innerWidth > 991) {
+                    card.style.opacity = 0;
+                    card.style.transform = `translateY(400px) scale(0.9)`;
+                    card.style.pointerEvents = 'none';
+                } else {
+                    card.style.opacity = 1;
+                    card.style.pointerEvents = 'auto';
+                    card.style.transform = 'none';
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

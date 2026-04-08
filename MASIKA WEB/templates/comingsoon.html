@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASIKA | Coming Soon</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-base: #FFFBF9;
+            --lotus-pink: #FF4D6D;
+            --lotus-peach: #FFC4A3;
+            --lotus-coral: #FF8FA3;
+            --text-dark: #1F1517;
+            --text-soft: #635054;
+            --masika-gradient: linear-gradient(135deg, #FF4D6D 0%, #FF8FA3 50%, #FFC4A3 100%);
+            --ease-prime: cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-base);
+            font-family: 'Manrope', sans-serif;
+            color: var(--text-dark);
+            height: 100vh;
+            overflow: hidden; /* No scrolling for a contained experience */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- BACKGROUND ATMOSPHERE --- */
+        .ambient-field {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb-1, .orb-2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: drift 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .orb-1 {
+            top: -10%; left: -10%;
+            width: 50vw; height: 50vw;
+            background: radial-gradient(circle, var(--lotus-pink), transparent 70%);
+        }
+
+        .orb-2 {
+            bottom: -20%; right: -10%;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, var(--lotus-peach), transparent 70%);
+            animation-delay: -5s;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 15%) scale(1.1); }
+        }
+
+        /* --- CENTRAL GLASS CONTAINER --- */
+        .stasis-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 600px;
+            padding: 60px 40px;
+            
+            /* High End Glass */
+            background: rgba(255, 255, 255, 0.25);
+            -webkit-backdrop-filter: blur(25px) saturate(140%);
+            backdrop-filter: blur(25px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 40px;
+            box-shadow: 
+                0 30px 60px rgba(31, 21, 23, 0.03), 
+                inset 0 0 40px rgba(255, 255, 255, 0.5);
+            
+            transform: translateY(20px);
+            animation: containerFloat 1.2s var(--ease-prime) forwards;
+            opacity: 0;
+        }
+
+        @keyframes containerFloat {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- THE BIO-ENGINE (Animation) --- */
+        .bio-engine {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 40px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .core-seed {
+            width: 20px; height: 20px;
+            background: var(--lotus-pink);
+            border-radius: 50%;
+            position: absolute;
+            z-index: 5;
+            box-shadow: 0 0 20px var(--lotus-pink);
+            animation: breathe 3s infinite ease-in-out;
+        }
+
+        .orbital-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1.5px solid transparent;
+            border-top-color: var(--lotus-peach);
+            border-left-color: rgba(255, 77, 109, 0.3);
+        }
+
+        .ring-1 { width: 60px; height: 60px; animation: spin 8s linear infinite; }
+        .ring-2 { width: 90px; height: 90px; border-width: 1px; border-right-color: var(--lotus-coral); animation: spin 12s linear infinite reverse; opacity: 0.6; }
+        .ring-3 { width: 120px; height: 120px; border: 1px dashed rgba(31,21,23,0.1); animation: spin 20s linear infinite; opacity: 0.3; }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(0.8); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 40px var(--lotus-coral); }
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- TYPOGRAPHY --- */
+        .status-tag {
+            font-family: 'Poppins'; font-size: 0.6rem; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--lotus-pink); font-weight: 700;
+            margin-bottom: 15px; border: 1px solid rgba(255, 77, 109, 0.2);
+            padding: 5px 12px; border-radius: 20px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem; line-height: 1.1; margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .italic-glow {
+            display: inline-block; font-style: italic; font-weight: 400;
+            background: var(--masika-gradient);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1rem; color: var(--text-soft); line-height: 1.6;
+            margin-bottom: 40px; opacity: 0.9;
+        }
+
+        /* --- BIOLOGICAL LOADING BAR --- */
+        .bio-loader-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(31,21,23,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .bio-liquid {
+            height: 100%;
+            width: 45%;
+            background: var(--masika-gradient);
+            border-radius: 4px;
+            position: relative;
+            animation: liquidFlow 4s ease-in-out infinite alternate;
+        }
+
+        .bio-liquid::after {
+            content: ''; position: absolute; top:0; right: 0;
+            height: 100%; width: 20px;
+            background: white; filter: blur(4px); opacity: 0.6;
+        }
+
+        @keyframes liquidFlow {
+            0% { width: 20%; }
+            50% { width: 50%; }
+            100% { width: 85%; }
+        }
+
+        /* --- CTA BUTTON --- */
+        .btn-return {
+            text-decoration: none;
+            padding: 14px 40px;
+            font-family: 'Poppins'; font-weight: 600; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: #fff;
+            border-radius: 100px;
+            position: relative;
+            z-index: 1; overflow: hidden;
+            transition: transform 0.4s var(--ease-prime), box-shadow 0.4s ease;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
+            background: #1F1517;
+        }
+
+        .btn-return::before {
+            content:''; position: absolute; inset: 0;
+            background: var(--masika-gradient);
+            z-index: -1; opacity: 0; transition: 0.4s ease;
+        }
+
+        .btn-return:hover::before { opacity: 1; }
+        .btn-return:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.4);
+        }
+
+        /* --- POLLEN PARTICLES (JS Generated) --- */
+        .pollen {
+            position: absolute;
+            background: var(--lotus-pink);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            animation: floatPollen 8s linear infinite;
+        }
+
+        @keyframes floatPollen {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Background -->
+    <div class="ambient-field">
+        <div class="orb-1"></div>
+        <div class="orb-2"></div>
+    </div>
+
+    <div class="stasis-container">
+        <!-- 3D Spinning Biology Concept -->
+        <div class="bio-engine">
+            <div class="core-seed"></div>
+            <div class="orbital-ring ring-1"></div>
+            <div class="orbital-ring ring-2"></div>
+            <div class="orbital-ring ring-3"></div>
+        </div>
+
+        <div class="status-tag">Status : Incubation</div>
+        
+        <h1>Ritual <br><span class="italic-glow">In Progress.</span></h1>
+        
+        <p>
+            We are currently cultivating this digital sanctuary with <br> biological precision and care. 
+            This feature will bloom shortly.
+        </p>
+
+        <!-- "Living" Loader -->
+        <div class="bio-loader-container">
+            <div class="bio-liquid"></div>
+        </div>
+
+        <a href="/" class="btn-return">Return to Base</a>
+    </div>
+
+    <script>
+        // Generating "Pollen" dust for the "Care that Blooms" theme
+        function createPollen() {
+            const body = document.querySelector('body');
+            const particle = document.createElement('div');
+            particle.classList.add('pollen');
+
+            // Random positioning and sizing
+            const size = Math.random() * 4 + 2 + 'px'; // 2px to 6px
+            particle.style.width = size;
+            particle.style.height = size;
+            particle.style.left = Math.random() * 100 + 'vw';
+            
+            // Random Animation Duration to make it look organic
+            particle.style.animationDuration = Math.random() * 5 + 6 + 's'; // 6s to 11s
+
+            body.appendChild(particle);
+
+            // Cleanup to keep DOM light
+            setTimeout(() => {
+                particle.remove();
+            }, 11000);
+        }
+
+        // Generate pollen every 400ms
+        setInterval(createPollen, 400);
+    </script>
+</body>
+</html>
